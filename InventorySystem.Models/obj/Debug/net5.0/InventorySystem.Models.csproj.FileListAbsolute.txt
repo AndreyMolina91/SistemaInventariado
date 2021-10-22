@@ -1,0 +1,12 @@
+C:\Users\Lenovo\source\repos\SistemaInventariado\InventorySystem.Models\bin\Debug\net5.0\InventorySystem.Models.deps.json
+C:\Users\Lenovo\source\repos\SistemaInventariado\InventorySystem.Models\bin\Debug\net5.0\InventorySystem.Models.dll
+C:\Users\Lenovo\source\repos\SistemaInventariado\InventorySystem.Models\bin\Debug\net5.0\ref\InventorySystem.Models.dll
+C:\Users\Lenovo\source\repos\SistemaInventariado\InventorySystem.Models\bin\Debug\net5.0\InventorySystem.Models.pdb
+C:\Users\Lenovo\source\repos\SistemaInventariado\InventorySystem.Models\obj\Debug\net5.0\InventorySystem.Models.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Lenovo\source\repos\SistemaInventariado\InventorySystem.Models\obj\Debug\net5.0\InventorySystem.Models.AssemblyInfoInputs.cache
+C:\Users\Lenovo\source\repos\SistemaInventariado\InventorySystem.Models\obj\Debug\net5.0\InventorySystem.Models.AssemblyInfo.cs
+C:\Users\Lenovo\source\repos\SistemaInventariado\InventorySystem.Models\obj\Debug\net5.0\InventorySystem.Models.csproj.CoreCompileInputs.cache
+C:\Users\Lenovo\source\repos\SistemaInventariado\InventorySystem.Models\obj\Debug\net5.0\InventorySystem.Models.dll
+C:\Users\Lenovo\source\repos\SistemaInventariado\InventorySystem.Models\obj\Debug\net5.0\ref\InventorySystem.Models.dll
+C:\Users\Lenovo\source\repos\SistemaInventariado\InventorySystem.Models\obj\Debug\net5.0\InventorySystem.Models.pdb
+C:\Users\Lenovo\source\repos\SistemaInventariado\InventorySystem.Models\obj\Debug\net5.0\InventorySystem.Models.csproj.AssemblyReference.cache
