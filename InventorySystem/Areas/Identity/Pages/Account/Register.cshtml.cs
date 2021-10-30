@@ -46,6 +46,12 @@ namespace InventorySystem.Areas.Identity.Pages.Account
         public class InputModel
         {
             [Required]
+            [StringLength(15, MinimumLength = 4)]
+            public string UserName { get; set; }
+
+            public string PhoneNumber { get; set; }
+
+            [Required]
             [EmailAddress]
             [Display(Name = "Email")]
             public string Email { get; set; }
@@ -53,13 +59,29 @@ namespace InventorySystem.Areas.Identity.Pages.Account
             [Required]
             [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
             [DataType(DataType.Password)]
-            [Display(Name = "Password")]
+            [Display(Name = "Contraseña")]
             public string Password { get; set; }
 
             [DataType(DataType.Password)]
-            [Display(Name = "Confirm password")]
+            [Display(Name = "Confirmar contraseña")]
             [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
             public string ConfirmPassword { get; set; }
+
+
+            //Copiamos las propiedades del modelo UsuarioApp
+            [Required]
+            public string Nombre { get; set; }
+
+            [Required]
+            public string Apellidos { get; set; }
+
+            public string Direccion { get; set; }
+
+            public string Ciudad { get; set; }
+
+            public string Pais { get; set; }
+
+            public string Role { get; set; }
         }
 
         public async Task OnGetAsync(string returnUrl = null)

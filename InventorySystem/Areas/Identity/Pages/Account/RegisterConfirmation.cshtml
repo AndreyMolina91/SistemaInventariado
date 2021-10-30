@@ -1,22 +1,39 @@
 ﻿@page
 @model RegisterConfirmationModel
 @{
-    ViewData["Title"] = "Register confirmation";
+    ViewData["Title"] = "Usuario creado correctamente";
 }
+<div class="container">
+    <br />
+    <h1 class="border-bottom text-primary">@ViewData["Title"]</h1>
+    @{
+        if (@Model.DisplayConfirmAccountLink)
+        {
+            <p>
+                Aún no hemos configurado nuestro envio de email <a href="https://aka.ms/aspaccountconf">¿Cómo configurar?</a> Mientras configuramos nuestro
+                email Sender: <a id="confirm-link" href="@Model.EmailConfirmationUrl">Puede activar su cuenta dando click AQUÍ</a>
+            </p>
+        }
+        else
+        {
+            <p>
+                Próximamente, Checkee su email para confirmar su registro.
+            </p>
+        }
 
-<h1>@ViewData["Title"]</h1>
-@{
-    if (@Model.DisplayConfirmAccountLink)
-    {
-<p>
-    This app does not currently have a real email sender registered, see <a href="https://aka.ms/aspaccountconf">these docs</a> for how to configure a real email sender.
-    Normally this would be emailed: <a id="confirm-link" href="@Model.EmailConfirmationUrl">Click here to confirm your account</a>
-</p>
+        <div class="row">
+            <div class="col-6">
+                <img class="w-100 pt-4 m-4" height="250" src="~/imgs/folder-body/Almacen-minimal.png" alt="Alternate Text" /> 
+            </div>
+            <div class="col-6">
+                <h1 class="mt-4 pt-5">Bienvenido a la compañia. </h1>
+                
+                <p class="pt-4"> Para mayor información sobre nuestros servicios<br /> no dude en contactarnos o seguirnos en nuestras RS. </p> <br />
+                <div class="mb-0"><i class="fab fa-facebook-square" style="font-size:18px"></i> <i class="fab fa-linkedin " style="font-size:18px"></i></div>
+                
+            </div>
+        </div>
+        
+
     }
-    else
-    {
-<p>
-        Please check your email to confirm your account.
-</p>
-    }
-}
+</div>
