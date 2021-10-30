@@ -19,6 +19,7 @@
   <ItemGroup>
     <ProjectReference Include="..\InventorySystem.DataAccess\InventorySystem.DataAccess.csproj" />
     <ProjectReference Include="..\InventorySystem.Models\InventorySystem.Models.csproj" />
+    <ProjectReference Include="..\InventorySystem.Utilities\InventorySystem.Utilities.csproj" />
   </ItemGroup>
 
   <ItemGroup>

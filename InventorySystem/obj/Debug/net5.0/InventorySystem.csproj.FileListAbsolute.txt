@@ -495,3 +495,5 @@ C:\Users\Lenovo\source\repos\SistemaInventariado\InventorySystem\obj\Debug\net5.
 C:\Users\Lenovo\source\repos\SistemaInventariado\InventorySystem\obj\Debug\net5.0\Razor\Areas\Identity\Pages\Error.cshtml.g.cs
 C:\Users\Lenovo\source\repos\SistemaInventariado\InventorySystem\obj\Debug\net5.0\Razor\Areas\Identity\Pages\_ValidationScriptsPartial.cshtml.g.cs
 C:\Users\Lenovo\source\repos\SistemaInventariado\InventorySystem\obj\Debug\net5.0\Razor\Areas\Identity\Pages\_ViewImports.cshtml.g.cs
+C:\Users\Lenovo\source\repos\SistemaInventariado\InventorySystem\bin\Debug\net5.0\InventorySystem.Utilities.dll
+C:\Users\Lenovo\source\repos\SistemaInventariado\InventorySystem\bin\Debug\net5.0\InventorySystem.Utilities.pdb

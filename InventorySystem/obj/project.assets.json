@@ -3275,6 +3275,19 @@
         "runtime": {
           "bin/placeholder/InventorySystem.Models.dll": {}
         }
+      },
+      "InventorySystem.Utilities/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v5.0",
+        "dependencies": {
+          "Microsoft.AspNetCore.Identity.UI": "5.0.11"
+        },
+        "compile": {
+          "bin/placeholder/InventorySystem.Utilities.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/InventorySystem.Utilities.dll": {}
+        }
       }
     }
   },
@@ -10124,12 +10137,18 @@
       "type": "project",
       "path": "../InventorySystem.Models/InventorySystem.Models.csproj",
       "msbuildProject": "../InventorySystem.Models/InventorySystem.Models.csproj"
+    },
+    "InventorySystem.Utilities/1.0.0": {
+      "type": "project",
+      "path": "../InventorySystem.Utilities/InventorySystem.Utilities.csproj",
+      "msbuildProject": "../InventorySystem.Utilities/InventorySystem.Utilities.csproj"
     }
   },
   "projectFileDependencyGroups": {
     "net5.0": [
       "InventorySystem.DataAccess >= 1.0.0",
       "InventorySystem.Models >= 1.0.0",
+      "InventorySystem.Utilities >= 1.0.0",
       "Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore >= 5.0.11",
       "Microsoft.AspNetCore.Identity.EntityFrameworkCore >= 5.0.11",
       "Microsoft.AspNetCore.Identity.UI >= 5.0.11",
@@ -10176,6 +10195,9 @@
             },
             "C:\\Users\\Lenovo\\source\\repos\\SistemaInventariado\\InventorySystem.Models\\InventorySystem.Models.csproj": {
               "projectPath": "C:\\Users\\Lenovo\\source\\repos\\SistemaInventariado\\InventorySystem.Models\\InventorySystem.Models.csproj"
+            },
+            "C:\\Users\\Lenovo\\source\\repos\\SistemaInventariado\\InventorySystem.Utilities\\InventorySystem.Utilities.csproj": {
+              "projectPath": "C:\\Users\\Lenovo\\source\\repos\\SistemaInventariado\\InventorySystem.Utilities\\InventorySystem.Utilities.csproj"
             }
           }
         }

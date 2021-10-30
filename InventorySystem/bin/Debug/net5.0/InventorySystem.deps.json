@@ -35,6 +35,7 @@
         "dependencies": {
           "InventorySystem.DataAccess": "1.0.0",
           "InventorySystem.Models": "1.0.0",
+          "InventorySystem.Utilities": "1.0.0",
           "Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore": "5.0.11",
           "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "5.0.11",
           "Microsoft.AspNetCore.Identity.UI": "5.0.11",
@@ -2551,6 +2552,17 @@
         },
         "compile": {
           "InventorySystem.Models.dll": {}
+        }
+      },
+      "InventorySystem.Utilities/1.0.0": {
+        "dependencies": {
+          "Microsoft.AspNetCore.Identity.UI": "5.0.11"
+        },
+        "runtime": {
+          "InventorySystem.Utilities.dll": {}
+        },
+        "compile": {
+          "InventorySystem.Utilities.dll": {}
         }
       },
       "Microsoft.AspNetCore.Antiforgery.Reference/5.0.0.0": {
@@ -5637,6 +5649,11 @@
       "sha512": ""
     },
     "InventorySystem.Models/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "InventorySystem.Utilities/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

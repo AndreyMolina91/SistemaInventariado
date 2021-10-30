@@ -33,7 +33,7 @@ namespace InventorySystem.Areas.Identity.Pages.Account.Manage
         public class InputModel
         {
             [Phone]
-            [Display(Name = "Phone number")]
+            [Display(Name = "Número telefónico")]
             public string PhoneNumber { get; set; }
         }
 

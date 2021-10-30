@@ -9,19 +9,21 @@
     }
 }
 
-<h2>Administrar cuenta</h2>
+<div class="container pt-5">
+    <h2 class="text-primary">Administrar cuenta</h2>
 
-<div>
-    <h4>Actualizar datos de mi cuenta</h4>
-    <hr />
-    <div class="row">
-        <div class="col-md-3">
-            <partial name="_ManageNav" />
-        </div>
-        <div class="col-md-9">
-            @RenderBody()
+    <div>    
+        <hr />
+        <div class="row">
+            <div class="col-md-3">
+                <partial name="_ManageNav" />
+            </div>
+            <div class="col-md-9">
+                @RenderBody()
+            </div>
         </div>
     </div>
+
 </div>
 
 @section Scripts {

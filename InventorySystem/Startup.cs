@@ -1,11 +1,13 @@
 using InventorySystem.Data;
 using InventorySystem.DataAccess.Repositories;
 using InventorySystem.DataAccess.Repositories.IRepositories;
+using InventorySystem.Utilities;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI;
+using Microsoft.AspNetCore.Identity.UI.Services; //Para el uso de IEmailSender
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -34,12 +36,27 @@ namespace InventorySystem
                     Configuration.GetConnectionString("DefaultConnection")));
             services.AddDatabaseDeveloperPageExceptionFilter();
 
-            services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+
+            //Comentamos el DefaultIdentity para crear uno que soporta roles de tipo Identity
+            //services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+            //    .AddEntityFrameworkStores<ApplicationDbContext>();
+
+
+            //Le agregamos el defaulttokenproviders para manejar el email sender que crearemos en utilidades
+            services.AddIdentity<IdentityUser, IdentityRole>().AddDefaultTokenProviders()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
+
+
+            //Instalamos el servicio de email sender de nuestra clase emailing
+            //Necesario importar el using de utilities y el de identity.UI.Services para el uso de interfaz + clase de emailing
+
+            services.AddSingleton<IEmailSender, Emailing>();
 
             services.AddScoped<IWorkUnity, WorkUnity>(); //Unidades de trabajo accesibles desde cualquier controlador
 
             services.AddControllersWithViews();
+
+            services.AddRazorPages(); //Solicitud para el uso del endpoint maprazorpages
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
