@@ -31,7 +31,11 @@
         "frameworks": {
           "net5.0": {
             "targetAlias": "net5.0",
-            "projectReferences": {}
+            "projectReferences": {
+              "C:\\Users\\Lenovo\\source\\repos\\SistemaInventariado\\InventorySystem.Models\\InventorySystem.Models.csproj": {
+                "projectPath": "C:\\Users\\Lenovo\\source\\repos\\SistemaInventariado\\InventorySystem.Models\\InventorySystem.Models.csproj"
+              }
+            }
           }
         },
         "warningProperties": {
@@ -115,6 +119,16 @@
       "frameworks": {
         "net5.0": {
           "targetAlias": "net5.0",
+          "dependencies": {
+            "Microsoft.AspNetCore.Mvc.ViewFeatures": {
+              "target": "Package",
+              "version": "[2.2.0, )"
+            },
+            "Microsoft.Extensions.Identity.Stores": {
+              "target": "Package",
+              "version": "[5.0.11, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",

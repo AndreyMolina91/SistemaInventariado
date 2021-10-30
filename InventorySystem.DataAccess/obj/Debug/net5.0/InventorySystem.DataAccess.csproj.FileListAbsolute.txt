@@ -10,3 +10,5 @@ C:\Users\Lenovo\source\repos\SistemaInventariado\InventorySystem.DataAccess\bin\
 C:\Users\Lenovo\source\repos\SistemaInventariado\InventorySystem.DataAccess\obj\Debug\net5.0\InventorySystem.DataAccess.dll
 C:\Users\Lenovo\source\repos\SistemaInventariado\InventorySystem.DataAccess\obj\Debug\net5.0\ref\InventorySystem.DataAccess.dll
 C:\Users\Lenovo\source\repos\SistemaInventariado\InventorySystem.DataAccess\obj\Debug\net5.0\InventorySystem.DataAccess.pdb
+C:\Users\Lenovo\source\repos\SistemaInventariado\InventorySystem.DataAccess\bin\Debug\net5.0\InventorySystem.Models.dll
+C:\Users\Lenovo\source\repos\SistemaInventariado\InventorySystem.DataAccess\bin\Debug\net5.0\InventorySystem.Models.pdb

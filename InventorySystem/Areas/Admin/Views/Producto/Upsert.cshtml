@@ -1,0 +1,168 @@
+﻿@model InventorySystem.Models.ViewModels.ProductoViewModel
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var titulo = "Crear Producto";
+}
+
+<!--Para que el navegador nos acepte el input que buscará el archivo img para subirlo debemos de incluir al form el enctype multipart....-->
+<form method="post" enctype="multipart/form-data">
+    <div class="row p-3 border-0">
+        <div asp-validation-summary="ModelOnly" class="text-danger">
+
+        </div>
+    </div>
+
+    @if (Model.Producto.Id != 0)
+    {
+        //Actualizar
+        titulo = "Actualizar Producto";
+        <input type="hidden" asp-for="Producto.Id" />
+    }
+
+    <div class="col-12 border-bottom">
+        <h2 class="text-primary">@titulo</h2>
+    </div>
+    <div class="col-8 pt-4">
+
+        <!--Campo SerieId del producto-->
+        <div class="form-group row">
+            <div class="col-4 text-end">
+                <label asp-for="Producto.SerieId"></label>
+            </div>
+            <div class="col-8">
+                <input asp-for="Producto.SerieId" class="form-control" />
+                <span asp-validation-for="Producto.SerieId" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="form-group row mt-2">
+            <div class="col-4 text-end">
+                <label asp-for="Producto.Descripcion"></label>
+            </div>
+            <div class="col-8">
+                <input asp-for="Producto.Descripcion" class="form-control" />
+                <span asp-validation-for="Producto.Descripcion" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="form-group row mt-2">
+            <div class="col-4 text-end">
+                <label asp-for="Producto.Costo"></label>
+            </div>
+            <div class="col-8">
+                <input asp-for="Producto.Costo" class="form-control" />
+                <span asp-validation-for="Producto.Costo" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="form-group row mt-2">
+            <div class="col-4 text-end">
+                <label asp-for="Producto.Precio"></label>
+            </div>
+            <div class="col-8">
+                <input asp-for="Producto.Precio" class="form-control" />
+                <span asp-validation-for="Producto.Precio" class="text-danger"></span>
+            </div>
+        </div>
+
+        <!--Listado de categorias en forma de dropdownlist por medio de la llave foranea categoriaid-->
+        <div class="form-group row mt-2">
+            <div class="col-4 text-end">
+                Categoria
+            </div>
+            <div class="col-8">
+                @Html.DropDownListFor(x => x.Producto.CategoriaId, Model.ListaCategorias, "Seleccione",
+               new { @class = "form-control" })
+                <span asp-validation-for="Producto.CategoriaId" class="text-danger"></span>
+            </div>
+        </div>
+
+        <!--Listado de marcas en forma de dropdownlist por medio de la llave foranea categoriaid-->
+        <div class="form-group row mt-2">
+            <div class="col-4 text-end">
+                Marca
+            </div>
+            <div class="col-8">
+                @Html.DropDownListFor(x => x.Producto.MarcaId, Model.ListaMarcas, "Seleccione",
+               new { @class = "form-control" })
+                <span asp-validation-for="Producto.MarcaId" class="text-danger"></span>
+            </div>
+        </div>
+
+        <!--campo imagen-->
+        <div class="form-group row mt-2">
+            <div class="col-4 text-end">
+                Imagen del producto
+            </div>
+            <div class="col-8">
+                <input type="file" name="files" id="selectimg" multiple class="form-control" />
+            </div>
+        </div>
+
+        <!--Campo productos padre-->
+        <div class="form-group row mt-2">
+            <div class="col-4 text-end">
+                Producto Padre
+            </div>
+            <div class="col-8">
+                @Html.DropDownListFor(x => x.Producto.PadreId, Model.ListaPadre, "Seleccione",
+               new { @class = "form-control" })
+                <span asp-validation-for="Producto.MarcaId" class="text-danger"></span>
+            </div>
+        </div>
+
+
+
+        <!--Campo Botones de acciones-->
+        <div class="form-group row mt-2">
+            <div class="col-8 offset-4">
+                @if (Model.Producto.Id != 0)
+                {
+                    <partial name="_BotonesUpdateBack" model="Model.Producto.Id" />
+                }
+                else
+                {
+                    <div class="row">
+                        <div class="col">
+                            <button type="submit" onclick="return validarEntrada()" class="btn btn-primary form-control">Crear</button>
+                        </div>
+                        <div class="col">
+                            <a asp-action="Index" class="btn btn-success form-control">Regresar</a>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+
+    @if (Model.Producto.Id != 0)
+    {
+        <div class="col-3 mt-3">
+            <div class="p-3">
+                <img src="@Model.Producto.UrlImagen" style="width: 100%; border-radius: 5px; border: 1px solid #a9bdbd" />
+            </div>
+            
+        </div>
+    }
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+
+
+    <script>
+
+        function validarEntrada() {
+            if (document.getElementById("selectimg").value=="") {
+                swal("Error", "Seleccione una imágen valida", "error");
+                return false;
+            }
+            return true;
+        }
+
+
+    </script>
+}
+
+
