@@ -14,7 +14,7 @@ function loadDataTable() {
             { "data": "serieId", "width": "15%" },
             { "data": "descripcion", "width": "20%" },
             { "data": "categoria.nombre", "width": "15%" },
-            { "data": "marca.nombre", "width": "15%" },
+            { "data": "marca.nombre", "width": "10%" },
             {
                 "data": "padre.descripcion",
                 "render": function (data) {
@@ -25,7 +25,7 @@ function loadDataTable() {
                         return data;
                     }
                 }, "width": "15%" },
-            { "data": "precio", "width": "15%" }, 
+            { "data": "precio", "width": "5%" }, 
             {
                 "data": "id",
                 "render": function (data) {
@@ -40,7 +40,7 @@ function loadDataTable() {
                                 </a>
                             </div>
                            `;
-                }, "width": "20%"
+                }, "width": "25%"
             }
         ]
 

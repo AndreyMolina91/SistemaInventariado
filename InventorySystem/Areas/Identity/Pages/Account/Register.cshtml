@@ -1,106 +1,117 @@
 ﻿@page
 @model RegisterModel
+@using InventorySystem.Utilities
 @{
-    ViewData["Title"] = "Crear Nueva Cuenta";
+    ViewData["Title"] = "Registro de Usuario";
 }
 
-<div class="container">
-    <br />
-    <h1>@ViewData["Title"]</h1>
+<div class="container pt-5">
+    <h1 class="text-primary">@ViewData["Title"]</h1>
 
-    <div class="row">
-        <div class="col-md-4">
-            <form asp-route-returnUrl="@Model.ReturnUrl" method="post">
-                <h4>Create a new account.</h4>
+    <div class="container">
+        <div class="">
+            <form class="row" asp-route-returnUrl="@Model.ReturnUrl" method="post">
+
                 <hr />
                 <div asp-validation-summary="All" class="text-danger"></div>
-                <!--Campo Username-->
-                <div class="form-group">
-                    <label asp-for="Input.UserName"></label>
-                    <input asp-for="Input.UserName" class="form-control" />
-                    <span asp-validation-for="Input.UserName" class="text-danger"></span>
+                <div class="col-6 pt-4">
+                    <!--Campo Username-->
+                    <div class="form-group">
+                        <input asp-for="Input.UserName" class="form-control mb-2" placeholder="Nombre de usuario"/>
+                        <span asp-validation-for="Input.UserName" class="text-danger"></span>
+                    </div>
+                    <!--Campo Nombre-->
+                    <div class="form-group">
+                        <input asp-for="Input.Nombre" class="form-control mb-2" placeholder="Nombre Personal"/>
+                        <span asp-validation-for="Input.Nombre" class="text-danger"></span>
+                    </div>
+                    <!--Campo Apellido-->
+                    <div class="form-group">
+                        <input asp-for="Input.Apellidos" class="form-control mb-2" placeholder="Apellidos"/>
+                        <span asp-validation-for="Input.Apellidos" class="text-danger"></span>
+                    </div>
+                    <!--Campo Dirección-->
+                    <div class="form-group">
+                        <input asp-for="Input.Direccion" class="form-control mb-2" placeholder="Dirección"/>
+                        <span asp-validation-for="Input.Direccion" class="text-danger"></span>
+                    </div>
+                    <!--Campo Ciudad-->
+                    <div class="form-group">
+                        <input asp-for="Input.Ciudad" class="form-control mb-2" placeholder="Ciudad de residencia"/>
+                        <span asp-validation-for="Input.Ciudad" class="text-danger"></span>
+                    </div>
+                    <!--Campo Pais-->
+                    <div class="form-group">
+                        <input asp-for="Input.Pais" class="form-control mb-2" placeholder="País de residencia" />
+                        <span asp-validation-for="Input.Pais" class="text-danger"></span>
+                    </div>
                 </div>
-                <!--Campo Nombre-->
-                <div class="form-group">
-                    <label asp-for="Input.Nombre"></label>
-                    <input asp-for="Input.Nombre" class="form-control" />
-                    <span asp-validation-for="Input.Nombre" class="text-danger"></span>
+                <div class="col-6 pt-4">
+                    <!--Campo Email-->
+                    <div class="form-group">
+                        <input asp-for="Input.Email" class="form-control mb-2" placeholder="Correo electrónico"/>
+                        <span asp-validation-for="Input.Email" class="text-danger"></span>
+                    </div>
+                    <!--Campo Contraseña-->
+                    <div class="form-group">
+                        <input asp-for="Input.Password" class="form-control mb-2" placeholder="Contraseña" />
+                        <span asp-validation-for="Input.Password" class="text-danger"></span>
+                    </div>
+                    <!--Campo confirmar contraseña-->
+                    <div class="form-group">
+                        <input asp-for="Input.ConfirmPassword" class="form-control mb-2" placeholder="Confirmar contraseña"/>
+                        <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
+                    </div>
+
+                    <!--Condicion que dice si el usuario tiene el roll admin se desplegara la lista de roles-->
+                    @if (User.IsInRole(StaticProperties.RoleAdmin))
+	                {
+                        <div class="mb-2">                          
+                            @Html.DropDownListFor(x => x.Input.Role, Model.Input.ListaRoles, "Seleccione un rol para el usuario", new {@class="form-control"})
+                        </div>
+		 
+	                }
+
+                    <button type="submit" class="btn btn-primary w-100">Crear usuario</button>
+
+                    <div class="row pt-3">
+                        <section class="row">
+                            
+                                <h4>¿Usar otro servicio para Registrar mi cuenta?.</h4>
+                        
+                            <hr />
+                            
+                                @{
+                                    if ((Model.ExternalLogins?.Count ?? 0) == 0)
+                                    {
+                                        <div>
+                                            <p>
+                                                Nuestro sistema cuenta con otros servicios de Autenticación de cuentas. <a href="https://docs.microsoft.com/es-es/aspnet/core/security/authentication/social/?view=aspnetcore-5.0&tabs=visual-studio">Ver más</a>
+                                                para conocer más detalles de los proveedores de servicios de autenticación que soporta InventorySystem by Disoft-LA.
+                                            </p>
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        <form id="external-account" asp-page="./ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl" method="post" class="form-horizontal">
+                                            <div>
+                                                <p>
+                                                    @foreach (var provider in Model.ExternalLogins)
+                                                    {
+                                                        <button type="submit" class="btn btn-primary" name="provider" value="@provider.Name" title="Log in using your @provider.DisplayName account">@provider.DisplayName</button>
+                                                    }
+                                                </p>
+                                            </div>
+                                        </form>
+                                    }
+                                }
+                        
+                        </section>
+                    </div>
                 </div>
-                <!--Campo Apellido-->
-                <div class="form-group">
-                    <label asp-for="Input.Apellidos"></label>
-                    <input asp-for="Input.Apellidos" class="form-control" />
-                    <span asp-validation-for="Input.Apellidos" class="text-danger"></span>
-                </div>
-                <!--Campo Dirección-->
-                <div class="form-group">
-                    <label asp-for="Input.Direccion"></label>
-                    <input asp-for="Input.Direccion" class="form-control" />
-                    <span asp-validation-for="Input.Direccion" class="text-danger"></span>
-                </div>
-                <!--Campo Ciudad-->
-                <div class="form-group">
-                    <label asp-for="Input.Ciudad"></label>
-                    <input asp-for="Input.Ciudad" class="form-control" />
-                    <span asp-validation-for="Input.Ciudad" class="text-danger"></span>
-                </div>
-                <!--Campo Pais-->
-                <div class="form-group">
-                    <label asp-for="Input.Pais"></label>
-                    <input asp-for="Input.Pais" class="form-control" />
-                    <span asp-validation-for="Input.Pais" class="text-danger"></span>
-                </div>
-                <!--Campo Email-->
-                <div class="form-group">
-                    <label asp-for="Input.Email"></label>
-                    <input asp-for="Input.Email" class="form-control" />
-                    <span asp-validation-for="Input.Email" class="text-danger"></span>
-                </div>
-                <!--Campo Contraseña-->
-                <div class="form-group">
-                    <label asp-for="Input.Password"></label>
-                    <input asp-for="Input.Password" class="form-control" />
-                    <span asp-validation-for="Input.Password" class="text-danger"></span>
-                </div>
-                <!--Campo confirmar contraseña-->
-                <div class="form-group">
-                    <label asp-for="Input.ConfirmPassword"></label>
-                    <input asp-for="Input.ConfirmPassword" class="form-control" />
-                    <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
-                </div>
-                <button type="submit" class="btn btn-primary mt-2">Crear usuario</button>
             </form>
         </div>
-        <div class="col-md-6 col-md-offset-2">
-            <section>
-                <h4>¿Usar otro servicio para Registrar mi cuenta?.</h4>
-                <hr />
-                @{
-                    if ((Model.ExternalLogins?.Count ?? 0) == 0)
-                    {
-                        <div>
-                            <p>
-                                Nuestro sistema cuenta con otros servicios de Autenticación de cuentas. <a href="https://docs.microsoft.com/es-es/aspnet/core/security/authentication/social/?view=aspnetcore-5.0&tabs=visual-studio">Ver más</a>
-                                para conocer más detalles de los proveedores de servicios de autenticación que soporta InventorySystem by Disoft-LA.
-                            </p>
-                        </div>
-                    }
-                    else
-                    {
-                        <form id="external-account" asp-page="./ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl" method="post" class="form-horizontal">
-                            <div>
-                                <p>
-                                    @foreach (var provider in Model.ExternalLogins)
-                                    {
-                                        <button type="submit" class="btn btn-primary" name="provider" value="@provider.Name" title="Log in using your @provider.DisplayName account">@provider.DisplayName</button>
-                                    }
-                                </p>
-                            </div>
-                        </form>
-                    }
-                }
-            </section>
-        </div>
+        
     </div>
 </div>
 @section Scripts {
