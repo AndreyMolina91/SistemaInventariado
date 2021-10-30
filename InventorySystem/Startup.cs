@@ -1,4 +1,6 @@
 using InventorySystem.Data;
+using InventorySystem.DataAccess.Repositories;
+using InventorySystem.DataAccess.Repositories.IRepositories;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -34,6 +36,9 @@ namespace InventorySystem
 
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
+
+            services.AddScoped<IWorkUnity, WorkUnity>(); //Unidades de trabajo accesibles desde cualquier controlador
+
             services.AddControllersWithViews();
         }
 
