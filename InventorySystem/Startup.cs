@@ -57,6 +57,15 @@ namespace InventorySystem
             services.AddControllersWithViews();
 
             services.AddRazorPages(); //Solicitud para el uso del endpoint maprazorpages
+
+            //Código para el uso de la app con identity UI configuration de esta manera exigimos al usuario conectarse en caso de ingresar a una parte
+            //Del sistema donde solo tengan acceso usuarios logeados con un roll especifico
+            services.ConfigureApplicationCookie(options =>
+            {
+                options.LoginPath = $"/Identity/Account/Login";
+                options.LogoutPath = $"/Identity/Account/Logout";
+                options.AccessDeniedPath = $"/Identity/Account/AccessDenied";
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

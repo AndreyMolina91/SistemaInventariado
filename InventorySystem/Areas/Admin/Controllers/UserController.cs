@@ -1,4 +1,6 @@
 ﻿using InventorySystem.Data;
+using InventorySystem.Utilities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -8,6 +10,7 @@ using System.Threading.Tasks;
 namespace InventorySystem.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles = StaticProperties.RoleAdmin)]
     public class UserController : Controller
     {
         private readonly ApplicationDbContext _context;
