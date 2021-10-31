@@ -73,14 +73,14 @@ namespace InventorySystem.Areas.Identity.Pages.Account
             public string Email { get; set; }
 
             [Required]
-            [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
+            [StringLength(100, ErrorMessage = "La {0} debe tener minimo {2} y máximo {1} caracteres.", MinimumLength = 6)]
             [DataType(DataType.Password)]
             [Display(Name = "Contraseña")]
             public string Password { get; set; }
 
             [DataType(DataType.Password)]
             [Display(Name = "Confirmar contraseña")]
-            [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+            [Compare("Password", ErrorMessage = "Las contraseñas no coinciden.")]
             public string ConfirmPassword { get; set; }
 
 
@@ -142,6 +142,7 @@ namespace InventorySystem.Areas.Identity.Pages.Account
                     Email = Input.Email,
                     Nombre = Input.Nombre,
                     Apellidos = Input.Apellidos,
+                    PhoneNumber = Input.PhoneNumber,
                     Direccion = Input.Direccion,
                     Ciudad = Input.Ciudad,
                     Pais = Input.Pais,
@@ -222,13 +223,13 @@ namespace InventorySystem.Areas.Identity.Pages.Account
                         //si es un cliente
                         if(user.Role == null)
                         {
-                        await _signInManager.SignInAsync(user, isPersistent: false);
-                                                return LocalRedirect(returnUrl);
+                            await _signInManager.SignInAsync(user, isPersistent: false);
+                            return LocalRedirect(returnUrl);
                         }
                         else
                         {
                             //administrador esta registrando un nuevo usuario redireccion a home
-                            return RedirectToAction("Index", "User", new { Area = "Identity" }); //Pantalla de administracion de usuarios
+                            return RedirectToAction("Index", "User", new {Area = "Admin"});
                         }
                         
                     }

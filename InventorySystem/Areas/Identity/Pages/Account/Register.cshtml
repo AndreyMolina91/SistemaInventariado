@@ -17,27 +17,32 @@
                 <div class="col-6 pt-4">
                     <!--Campo Username-->
                     <div class="form-group">
-                        <input asp-for="Input.UserName" class="form-control mb-2" placeholder="Nombre de usuario"/>
+                        <input asp-for="Input.UserName" class="form-control mb-2" placeholder="Nombre de usuario" />
                         <span asp-validation-for="Input.UserName" class="text-danger"></span>
                     </div>
                     <!--Campo Nombre-->
                     <div class="form-group">
-                        <input asp-for="Input.Nombre" class="form-control mb-2" placeholder="Nombre Personal"/>
+                        <input asp-for="Input.Nombre" class="form-control mb-2" placeholder="Nombre Personal" />
                         <span asp-validation-for="Input.Nombre" class="text-danger"></span>
                     </div>
                     <!--Campo Apellido-->
                     <div class="form-group">
-                        <input asp-for="Input.Apellidos" class="form-control mb-2" placeholder="Apellidos"/>
+                        <input asp-for="Input.Apellidos" class="form-control mb-2" placeholder="Apellidos" />
                         <span asp-validation-for="Input.Apellidos" class="text-danger"></span>
+                    </div>
+                    <!--Campo teléfono-->
+                    <div class="form-group">
+                        <input asp-for="Input.PhoneNumber" class="form-control mb-2" placeholder="Teléfono de contacto" />
+                        <span asp-validation-for="Input.PhoneNumber" class="text-danger"></span>
                     </div>
                     <!--Campo Dirección-->
                     <div class="form-group">
-                        <input asp-for="Input.Direccion" class="form-control mb-2" placeholder="Dirección"/>
+                        <input asp-for="Input.Direccion" class="form-control mb-2" placeholder="Dirección" />
                         <span asp-validation-for="Input.Direccion" class="text-danger"></span>
                     </div>
                     <!--Campo Ciudad-->
                     <div class="form-group">
-                        <input asp-for="Input.Ciudad" class="form-control mb-2" placeholder="Ciudad de residencia"/>
+                        <input asp-for="Input.Ciudad" class="form-control mb-2" placeholder="Ciudad de residencia" />
                         <span asp-validation-for="Input.Ciudad" class="text-danger"></span>
                     </div>
                     <!--Campo Pais-->
