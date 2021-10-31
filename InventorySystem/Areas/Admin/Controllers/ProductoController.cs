@@ -1,6 +1,8 @@
 ﻿using InventorySystem.DataAccess.Repositories.IRepositories;
 using InventorySystem.Models;
 using InventorySystem.Models.ViewModels;
+using InventorySystem.Utilities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -15,6 +17,7 @@ namespace InventorySystem.Areas.Admin.Controllers
     //Controlador vacio donde crearemos nuestros metodos get post update desde 0 integrandolo con la repo unidad de trabajo
 
     [Area("Admin")] //Indicamos el area a la cual pertenece el controlador
+    [Authorize(Roles = StaticProperties.RoleAdmin+ "," +StaticProperties.RoleWorker)]//Usuarios autorizados
     public class ProductoController : Controller
     {
         //Ahora creamos nuestraa variable de tipo unidad de trabajo
