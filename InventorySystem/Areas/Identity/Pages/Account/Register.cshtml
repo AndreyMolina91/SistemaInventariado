@@ -10,7 +10,7 @@
 
     <div class="container">
         <div class="">
-            <form class="row" asp-route-returnUrl="@Model.ReturnUrl" method="post">
+            <form id="formregister" class="row" asp-route-returnUrl="@Model.ReturnUrl" method="post">
 
                 <hr />
                 <div asp-validation-summary="All" class="text-danger"></div>
@@ -121,4 +121,5 @@
 </div>
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
+ 
 }
