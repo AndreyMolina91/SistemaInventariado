@@ -25,16 +25,15 @@ namespace InventorySystem.Utilities
             mailMessage.To.Add(email);
             mailMessage.Subject = subject;
             mailMessage.Body = mensaje;
-            mailMessage.From = new MailAddress("andrey_molina91@hotmail.com");
+            mailMessage.From = new MailAddress("email");
             mailMessage.IsBodyHtml = true;
             SmtpClient smtp = new SmtpClient("smtp.sendgrid.net");
             smtp.Port = 587;
             //smtp.UseDefaultCredentials = true;
             //smtp.EnableSsl = true;
-            smtp.Credentials = new System.Net.NetworkCredential("apikey", "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");
+            smtp.Credentials = new System.Net.NetworkCredential("apikey", "keysendgrid-api-key");
 
             return smtp.SendMailAsync(mailMessage);
-            //Mikey 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
         }
     }
 }
