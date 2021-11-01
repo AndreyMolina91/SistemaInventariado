@@ -110,7 +110,7 @@ namespace InventorySystem.Areas.Identity.Pages.Account
             //Inicializamos la lista roles creando un inputmodel
             Input = new InputModel()
             {
-                //Creamos una lista de roles que contendra el text el cual será el nombre y el valor de selectlistitem
+                //Creamos una lista de roles que contendra el text el cual será el nombre y el valor de selectlistitem excluyendo el de cliente
                 ListaRoles = _roleManager.Roles.Where(x => x.Name != StaticProperties.RoleClient).Select(n => n.Name).Select(l => new SelectListItem
                 {
                     Text = l,
@@ -147,12 +147,14 @@ namespace InventorySystem.Areas.Identity.Pages.Account
                     Ciudad = Input.Ciudad,
                     Pais = Input.Pais,
                     Role = Input.Role
-                };
+                    
+                };             
+                
 
 
                 //Aqui pasamos el usuario con los datos y verifica si estan correctos
                 var result = await _userManager.CreateAsync(user, Input.Password);
-                //Si los datos son correctos hace el envio del email
+                
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User created a new account with password.");
@@ -203,16 +205,17 @@ namespace InventorySystem.Areas.Identity.Pages.Account
 
 
                     //Código que gestiona el envio de email
-                    //var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
-                    //code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
-                    //var callbackUrl = Url.Page(
-                    //    "/Account/ConfirmEmail",
-                    //    pageHandler: null,
-                    //    values: new { area = "Identity", userId = user.Id, code = code, returnUrl = returnUrl },
-                    //    protocol: Request.Scheme);
 
-                    //await _emailSender.SendEmailAsync(Input.Email, "Confirm your email",
-                    //    $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
+                    var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+                    code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
+                    var callbackUrl = Url.Page(
+                        "/Account/ConfirmEmail",
+                        pageHandler: null,
+                        values: new { area = "Identity", userId = user.Id, code = code, returnUrl = returnUrl },
+                        protocol: Request.Scheme);
+
+                    await _emailSender.SendEmailAsync(Input.Email, "Confirma tu Email",
+                        $"confirma tu cuenta <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>Haz click aqui</a>.");
 
                     if (_userManager.Options.SignIn.RequireConfirmedAccount)
                     {
