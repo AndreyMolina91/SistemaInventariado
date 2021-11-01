@@ -34,7 +34,6 @@ namespace InventorySystem.Utilities
             smtp.Credentials = new System.Net.NetworkCredential("apikey", "keysendgrid-api-key");
 
             return smtp.SendMailAsync(mailMessage);
-            
         }
     }
 }
