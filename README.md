@@ -1,4 +1,4 @@
-<h1>SISTEMA DE INVENTARIADO 🎁</h1>
+<h1>INVENTORYSYSTEM 🎁</h1>
   
 Creado con .NetCore Framework, EntityFramework MVC y Capas + SqlServer. (Probabilidad de uso de Docker al finalizar el proyecto).
 
