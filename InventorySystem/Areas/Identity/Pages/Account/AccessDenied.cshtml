@@ -1,10 +1,33 @@
 ﻿@page
 @model AccessDeniedModel
 @{
-    ViewData["Title"] = "Access denied";
+    ViewData["Title"] = "Acceso denegado";
 }
 
-<header>
-    <h1 class="text-danger">@ViewData["Title"]</h1>
-    <p class="text-danger">You do not have access to this resource.</p>
-</header>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 Error - Animated</title>
+    <!-- Styles -->
+    <link rel="stylesheet" href="/css/404-PageStyles.css">
+    <!-- Scripts -->
+    <script src="/js/404-PageScripts.js"></script>
+</head>
+<body>
+    <div class="circle move" data-value="-1"></div>
+    <div class="circle move" data-value="-1"></div>
+    <div class="circle move" data-value="-1"></div>
+    <div class="circle move" data-value="-1"></div>
+
+    <div class="stars">
+        <img src="/imgs/folder-404/constelacion.png" alt="Stars_img">
+    </div>
+
+    <div class="contenedor pt-4">
+        <p>Parece que no tienes acceso a este módulo del sistema</p>
+        <h1>404</h1>
+        <a asp-area="" asp-controller="Home" asp-action="Index">Volver a Home</a>
+        <img src="/imgs/folder-404/astronauta.png" alt="Astronaut_img">
+    </div>
+</body>
+

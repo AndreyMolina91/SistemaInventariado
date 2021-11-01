@@ -23,5 +23,11 @@ namespace InventorySystem.Data
         public DbSet<Producto> Productos { get; set; }
 
         public DbSet<UsuarioApp> Usuarios { get; set; }
+
+        public DbSet<BodegaProducto> BodegaProductos { get; set; }
+
+        public DbSet<Inventario> Inventarios { get; set; }
+
+        public DbSet<DetalleInventario> DetalleInventarios { get; set; }
     }
 }
