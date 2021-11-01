@@ -34,7 +34,6 @@ namespace InventorySystem.Utilities
             smtp.Credentials = new System.Net.NetworkCredential("apikey", "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");
 
             return smtp.SendMailAsync(mailMessage);
-            //Carlos Key 
             //Mikey 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
         }
     }
