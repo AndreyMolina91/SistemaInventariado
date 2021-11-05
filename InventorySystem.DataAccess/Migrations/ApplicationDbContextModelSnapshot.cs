@@ -110,6 +110,8 @@ namespace InventorySystem.DataAccess.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("InventarioId");
+
                     b.HasIndex("ProductoId");
 
                     b.ToTable("DetalleInventarios");
@@ -134,18 +136,15 @@ namespace InventorySystem.DataAccess.Migrations
                     b.Property<DateTime>("FechaInicial")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("UserAppId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("UsusarioAppId")
+                    b.Property<string>("UsuarioAppId")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
 
                     b.HasIndex("BodegaId");
 
-                    b.HasIndex("UserAppId");
+                    b.HasIndex("UsuarioAppId");
 
                     b.ToTable("Inventarios");
                 });
@@ -463,11 +462,19 @@ namespace InventorySystem.DataAccess.Migrations
 
             modelBuilder.Entity("InventorySystem.Models.DetalleInventario", b =>
                 {
+                    b.HasOne("InventorySystem.Models.Inventario", "Inventario")
+                        .WithMany()
+                        .HasForeignKey("InventarioId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("InventorySystem.Models.Producto", "Producto")
                         .WithMany()
                         .HasForeignKey("ProductoId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Inventario");
 
                     b.Navigation("Producto");
                 });
@@ -482,7 +489,9 @@ namespace InventorySystem.DataAccess.Migrations
 
                     b.HasOne("InventorySystem.Models.UsuarioApp", "UsuarioApp")
                         .WithMany()
-                        .HasForeignKey("UserAppId");
+                        .HasForeignKey("UsuarioAppId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Bodega");
 

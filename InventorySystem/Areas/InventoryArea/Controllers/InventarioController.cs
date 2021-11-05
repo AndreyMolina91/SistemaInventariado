@@ -86,7 +86,7 @@ namespace InventorySystem.Areas.InventoryArea.Controllers
                 //capturamos el id del usuario
                 var claimIdentity = (ClaimsIdentity)User.Identity;
                 var claim = claimIdentity.FindFirst(ClaimTypes.NameIdentifier);
-                _inventarioVM.Inventario.UsusarioAppId = claim.Value;
+                _inventarioVM.Inventario.UsuarioAppId = claim.Value;
 
                 //Agregamos los datos al model y guardamos
                 _context.Inventarios.Add(_inventarioVM.Inventario);
@@ -195,6 +195,19 @@ namespace InventorySystem.Areas.InventoryArea.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        //Get de la vista de Historial de cambios en Stock de productos
+        public IActionResult History()
+        {
+            return View();
+        }
+
+        public IActionResult HistoryDetails(int id)
+        {
+            var details = _context.DetalleInventarios.Include(x => x.Producto).Include(x => x.Producto.Marca).
+                Where(x => x.InventarioId == id);
+            return View(details);
+        }
+
         #region API
 
         [HttpGet]
@@ -205,6 +218,15 @@ namespace InventorySystem.Areas.InventoryArea.Controllers
 
             //En el archivo Json diremos que data será todos los objetos de bodega y productos recibidos en la variable
             return Json(new {data = GetBodegaProducto});
+        }
+
+        //Obtendremos los datos del historial por medio de un formato Json
+        [HttpGet]
+        public IActionResult GetAllHistory()
+        {
+            var GetInventarioBodega = _context.Inventarios.Include(x => x.Bodega).Include(x => x.UsuarioApp).Where(x => x.Estado == true).ToList();
+            //data contendrá en formato Json la lista con los datos en Inventario-bodega-usuarioapp con estado True
+            return Json(new { data = GetInventarioBodega });
         }
 
         #endregion

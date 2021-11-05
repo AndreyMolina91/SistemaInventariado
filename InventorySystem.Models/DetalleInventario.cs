@@ -17,6 +17,7 @@ namespace InventorySystem.Models
         public int InventarioId { get; set; }
 
         [ForeignKey("InventarioId")]
+        public Inventario Inventario { get; set; }
 
         [Required]
         [Display(Name = "Producto")]

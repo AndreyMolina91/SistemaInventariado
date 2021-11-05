@@ -1,0 +1,65 @@
+﻿@model IEnumerable<DetalleInventario>
+@{
+    ViewData["Title"] = "HistoryDetails";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="pt-5 container">
+    <div class="row">
+        <div class="col-12 mb-2">
+            <h2 class="text-primary border-bottom">Detalles</h2>
+        </div>
+    </div>
+
+    <div>
+        <table class="table">
+            <thead>
+                <tr class="table-secondary">
+                    <th class="text-dark">
+                        Producto
+                    </th>
+                    <th class="text-dark">
+                        Marca
+                    </th>
+                    <th class="text-dark text-end">
+                        Costo
+                    </th>
+                    <th class="text-dark text-end">
+                        Stock Anterior
+                    </th>
+                    <th class="text-dark text-end">
+                        Cantidad
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(i => item.Producto.Descripcion)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(i => item.Producto.Marca.Nombre)
+                    </td>
+                    <td class="text-end">
+                        @Html.DisplayFor(i => item.Producto.Costo)
+                    </td>
+                    <td class="text-end">
+                        @Html.DisplayFor(i => item.StockAnterior)
+                    </td>
+                    <td class="text-primary text-end">
+                        @Html.DisplayFor(i => item.Cantidad)
+                    </td>
+                </tr>
+	             }
+            </tbody>
+        </table> 
+    </div>
+
+    <div class="col-12 pt-2 text-end">
+        <a class="btn btn-info" asp-action="History"><i class="fa fa-chevron-circle-left"></i>  Volver</a>
+    </div>
+
+</div>
