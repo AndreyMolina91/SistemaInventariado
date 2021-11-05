@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace InventorySystem.DataAccess.Migrations
 {
-    public partial class MigracionInventariosYDetalles : Migration
+    public partial class MigracionInventoryAndDetails : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -71,6 +71,35 @@ namespace InventorySystem.DataAccess.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Inventarios",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    UsuarioAppId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    FechaInicial = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    FechaFinal = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    BodegaId = table.Column<int>(type: "int", nullable: false),
+                    Estado = table.Column<bool>(type: "bit", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Inventarios", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Inventarios_AspNetUsers_UsuarioAppId",
+                        column: x => x.UsuarioAppId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Inventarios_Bodegas_BodegaId",
+                        column: x => x.BodegaId,
+                        principalTable: "Bodegas",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "DetalleInventarios",
                 columns: table => new
                 {
@@ -85,39 +114,15 @@ namespace InventorySystem.DataAccess.Migrations
                 {
                     table.PrimaryKey("PK_DetalleInventarios", x => x.Id);
                     table.ForeignKey(
+                        name: "FK_DetalleInventarios_Inventarios_InventarioId",
+                        column: x => x.InventarioId,
+                        principalTable: "Inventarios",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
                         name: "FK_DetalleInventarios_Productos_ProductoId",
                         column: x => x.ProductoId,
                         principalTable: "Productos",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Inventarios",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    UsusarioAppId = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    UserAppId = table.Column<string>(type: "nvarchar(450)", nullable: true),
-                    FechaInicial = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    FechaFinal = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    BodegaId = table.Column<int>(type: "int", nullable: false),
-                    Estado = table.Column<bool>(type: "bit", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Inventarios", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Inventarios_AspNetUsers_UserAppId",
-                        column: x => x.UserAppId,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_Inventarios_Bodegas_BodegaId",
-                        column: x => x.BodegaId,
-                        principalTable: "Bodegas",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -133,6 +138,11 @@ namespace InventorySystem.DataAccess.Migrations
                 column: "ProductoId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_DetalleInventarios_InventarioId",
+                table: "DetalleInventarios",
+                column: "InventarioId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_DetalleInventarios_ProductoId",
                 table: "DetalleInventarios",
                 column: "ProductoId");
@@ -143,9 +153,9 @@ namespace InventorySystem.DataAccess.Migrations
                 column: "BodegaId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Inventarios_UserAppId",
+                name: "IX_Inventarios_UsuarioAppId",
                 table: "Inventarios",
-                column: "UserAppId");
+                column: "UsuarioAppId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

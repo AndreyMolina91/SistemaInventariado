@@ -502,3 +502,5 @@ C:\Users\Lenovo\source\repos\SistemaInventariado\InventorySystem\bin\Debug\net5.
 C:\Users\Lenovo\source\repos\SistemaInventariado\InventorySystem\bin\Debug\net5.0\StarkbankEcdsa.dll
 C:\Users\Lenovo\source\repos\SistemaInventariado\InventorySystem\obj\Debug\net5.0\Razor\Areas\InventoryArea\Views\Inventario\Index.cshtml.g.cs
 C:\Users\Lenovo\source\repos\SistemaInventariado\InventorySystem\obj\Debug\net5.0\Razor\Areas\InventoryArea\Views\Inventario\Create.cshtml.g.cs
+C:\Users\Lenovo\source\repos\SistemaInventariado\InventorySystem\obj\Debug\net5.0\Razor\Areas\InventoryArea\Views\Inventario\History.cshtml.g.cs
+C:\Users\Lenovo\source\repos\SistemaInventariado\InventorySystem\obj\Debug\net5.0\Razor\Areas\InventoryArea\Views\Inventario\HistoryDetails.cshtml.g.cs

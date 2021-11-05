@@ -15,9 +15,9 @@ namespace InventorySystem.Models
 
         [Required]
         [Display(Name = "Usuario")]
-        public string UsusarioAppId { get; set; }
+        public string UsuarioAppId { get; set; }
 
-        [ForeignKey("UserAppId")]
+        [ForeignKey("UsuarioAppId")]
         public UsuarioApp UsuarioApp { get; set; }
 
         [Required]
