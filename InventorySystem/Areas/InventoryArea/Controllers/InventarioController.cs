@@ -15,7 +15,7 @@ using System.Security.Claims;
 namespace InventorySystem.Areas.InventoryArea.Controllers
 {
     [Area("InventoryArea")]
-    [Authorize(Roles = StaticProperties.RoleAdmin+","+StaticProperties.RoleWorker)]
+    [Authorize(Roles = StaticProperties.RoleAdmin + "," + StaticProperties.RoleWorker)]
     public class InventarioController : Controller
     {
         //Para acceder a nuestros modelos y la información en las bases de datos
@@ -24,6 +24,7 @@ namespace InventorySystem.Areas.InventoryArea.Controllers
         //Durante la vista y cambios los daatos no cambien gracias al bindproperty
         [BindProperty]
         public InventarioViewModel _inventarioVM { get; set; }
+
 
         public InventarioController(ApplicationDbContext context)
         {
@@ -51,7 +52,9 @@ namespace InventorySystem.Areas.InventoryArea.Controllers
                 Value = p.Id.ToString()
             });
 
+            //Creamoss la instancia al objeto 
             _inventarioVM.DetalleInventarios = new List<DetalleInventario>();
+
 
             //Si el inventario recibido por parametro es diferente a nulo = que existe
             if (inventarioId!=null)
@@ -126,6 +129,70 @@ namespace InventorySystem.Areas.InventoryArea.Controllers
             }
 
             return RedirectToAction("Create", new { inventarioId = _inventarioVM.Inventario.Id });
+        }
+
+        public IActionResult StockUp(int id)
+        {
+            _inventarioVM = new InventarioViewModel();
+            var detalle = _context.DetalleInventarios.FirstOrDefault(x => x.Id == id);
+            _inventarioVM.Inventario = _context.Inventarios.FirstOrDefault(x => x.Id == detalle.InventarioId);
+
+            detalle.Cantidad += 1;
+            _context.SaveChanges();
+            return RedirectToAction("Create", new { inventarioId = _inventarioVM.Inventario.Id });
+        }
+
+        public IActionResult StockDown(int id)
+        {
+            _inventarioVM = new InventarioViewModel();
+            var detalle = _context.DetalleInventarios.FirstOrDefault(x => x.Id == id);
+            _inventarioVM.Inventario = _context.Inventarios.FirstOrDefault(x => x.Id == detalle.InventarioId);
+
+            if (detalle.Cantidad ==1)
+            {
+                _context.DetalleInventarios.Remove(detalle);
+                _context.SaveChanges();
+            }
+            else
+            {
+                detalle.Cantidad -= 1;
+                _context.SaveChanges();
+            }
+
+           
+            return RedirectToAction("Create", new { inventarioId = _inventarioVM.Inventario.Id });
+        }
+
+        //Id es el parametro que nos envia asp-route -> Id
+        public IActionResult StockGenerate(int Id)
+        {
+            var inventario = _context.Inventarios.FirstOrDefault(x => x.Id == Id);
+            var listaDetalle = _context.DetalleInventarios.Where(x => x.InventarioId == Id);
+            foreach (var item in listaDetalle)
+            {
+                var bodegaProducto = _context.BodegaProductos.Include(x => x.Producto).FirstOrDefault(x => x.ProductoId == item.ProductoId && x.BodegaId == inventario.BodegaId);
+
+                if (bodegaProducto != null)
+                {
+                    bodegaProducto.Cantidad += item.Cantidad;
+                }
+                else
+                {
+                    //Siempre inicializar las variables antes de realizar un nuevo registro
+                    bodegaProducto = new BodegaProducto();
+                    bodegaProducto.BodegaId = inventario.BodegaId;
+                    bodegaProducto.ProductoId = item.ProductoId;
+                    bodegaProducto.Cantidad = item.Cantidad;
+                    _context.BodegaProductos.Add(bodegaProducto);
+                }
+            }
+
+            //Actualizar cabecera de inventario
+            inventario.Estado = true;
+            inventario.FechaFinal = DateTime.Now;
+            _context.SaveChanges();
+            //Retorno al stock de inventarios
+            return RedirectToAction(nameof(Index));
         }
 
         #region API

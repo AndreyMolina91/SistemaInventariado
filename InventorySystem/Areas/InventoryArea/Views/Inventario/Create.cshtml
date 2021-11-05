@@ -54,53 +54,82 @@
 
     </form>
 
-    <div class="container p-5">
+    <div class="container p-5 pb-1">
         <table class="table table-bordered">
-            <thead class="thead-dark">
-                <tr class="table-primary thead-dark">
-                    <th>
+            <thead>
+                <tr class="table-secondary">
+                    <th class="text-dark">
                         Producto
                     </th>
-                    <th>
+                    <th class="text-dark">
                         Marca
                     </th>
-                    <th class="text-end">
+                    <th class="text-end text-dark">
                         Costo
                     </th>
-                    <th class="text-end">
-                    Stock Anterior
+                    <th class="text-end text-dark">
+                        Stock Anterior
                     </th>
-                    <th class="text-end">
-                    Cantidad en Stock
+                    <th class="text-end text-dark">
+                        Cantidad en Stock
+                    </th>
+                    <th class="text-end text-dark">
+                        Acciones
                     </th>
                 </tr>
             </thead>
             <tbody>
-                @foreach (var item in Model.DetalleInventarios) 
+                @foreach (var item in Model.DetalleInventarios)
                 {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(x => item.Producto.Descripcion)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(x => item.Producto.Marca.Nombre)
-                    </td>
-                    <td class="text-end">
-                        @Html.DisplayFor(x => item.Producto.Costo)
-                    </td>
-                    <td class="text-end">
-                        @Html.DisplayFor(x => item.StockAnterior)
-                    </td>
-                    <td class="text-end text-primary">
-                        @Html.DisplayFor(x => item.Cantidad)
-                    </td>
-                </tr>
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(x => item.Producto.Descripcion)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(x => item.Producto.Marca.Nombre)
+                        </td>
+                        <td class="text-end">
+                            @Html.DisplayFor(x => item.Producto.Costo)
+                        </td>
+                        <td class="text-end">
+                            @Html.DisplayFor(x => item.StockAnterior)
+                        </td>
+                        <td class="text-end text-primary">
+                            @Html.DisplayFor(x => item.Cantidad)
+                        </td>
+                        <td class="text-end text-primary">
+                            <a class="btn btn-info" asp-action="StockUp" asp-route-Id="@item.Id">
+                                <i class="fas fa-plus"></i>
+                            </a>
+                            <a class="btn btn-warning" asp-action="StockDown" asp-route-Id="@item.Id">
+                                <i class="fas fa-minus"></i>
+                            </a>
+                        </td>
+                    </tr>
                 }
             </tbody>
         </table>
     </div>
 
+    <!--Generar Stock-->
+    @if (Model.DetalleInventarios.Count > 0)
+    {
+        <div class="row">
+            <div class="col-4"></div>
+            <div class="col-4">
+                <a asp-action="StockGenerate" class="btn btn-primary form-control" asp-route-Id="@Model.Inventario.Id">
+                    Generar Stock en Bodega   <i class="fas fa-save"></i>
+                </a>
+            </div>
+            <div class="col-4"></div>
+        </div>
+    }
+
+
 </div>
+
+
+
 
 <!--JS para trabajar con los datos del form-->
 @section Scripts{
