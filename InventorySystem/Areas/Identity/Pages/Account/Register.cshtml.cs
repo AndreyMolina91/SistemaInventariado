@@ -206,6 +206,8 @@ namespace InventorySystem.Areas.Identity.Pages.Account
 
                     //Código que gestiona el envio de email
 
+                    //variable del tipo usuario que creará el objeto Json a enviar por correo
+
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
                     code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
                     var callbackUrl = Url.Page(

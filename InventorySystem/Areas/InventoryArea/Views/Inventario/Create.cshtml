@@ -1,0 +1,121 @@
+﻿@model InventorySystem.Models.ViewModels.InventarioViewModel
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<!--Ahora creamos nuestra vista con html+bootstrap-->
+
+<div class="pt-5">
+
+    <div class="card-header bg-dark text-light ml-0 row container mb-2">
+        <div class="col-6">
+            <i class="fas fa-boxes"></i> Nuevo Inventario
+        </div>
+    </div>
+
+    <!--Secccion formulario-->
+    <form method="post" class="p-2">
+        <!--Input que contendrá nuestro id del inventario-->
+        <input asp-for="@Model.Inventario.Id" hidden name="inventarioId" />
+
+        <!--Seccion Bodega del formulario-->
+        <div class="form-group row mb-2">
+            <div class="col-2" style="text-align:right;">
+                <label class="col-form-label text-end">Bodega</label>
+            </div>
+            <div class="col-4">
+                @Html.DropDownListFor(x => x.Inventario.BodegaId, Model.ListaBodegas, new { @class = "form-control", id = "bodegaId" })
+                <span asp-validation-for="Inventario.BodegaId" class="text-warning"></span>
+            </div>
+        </div>
+
+        <!--Seccion Productos + Cantidad del formulario-->
+        <div class="form-group row">
+            <div class="col-2 text-end">
+                <label class="col-form-label text-end">Producto: </label>
+            </div>
+            <div class="col-4">
+                <select name="producto" asp-items="Model.ListaProductos" class="form-control"></select>
+            </div>
+
+            <div class="col-1">
+                <label class="col-form-label">Cantidad: </label>
+            </div>
+            <div class="col-1">
+                <input name="cantidad" id="cantidadId" class="form-control" maxlength="3" type="number" min="1" value="1" />
+            </div>
+            <div class="col-3">
+                <button type="submit" class="btn btn-primary" asp-action="Create" id="btnProducto">
+                    <i class="fas fa-plus"></i> Agregar
+                </button>
+            </div>
+
+        </div>
+
+    </form>
+
+    <div class="container p-5">
+        <table class="table table-bordered">
+            <thead class="thead-dark">
+                <tr class="table-primary thead-dark">
+                    <th>
+                        Producto
+                    </th>
+                    <th>
+                        Marca
+                    </th>
+                    <th class="text-end">
+                        Costo
+                    </th>
+                    <th class="text-end">
+                    Stock Anterior
+                    </th>
+                    <th class="text-end">
+                    Cantidad en Stock
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.DetalleInventarios) 
+                {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(x => item.Producto.Descripcion)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(x => item.Producto.Marca.Nombre)
+                    </td>
+                    <td class="text-end">
+                        @Html.DisplayFor(x => item.Producto.Costo)
+                    </td>
+                    <td class="text-end">
+                        @Html.DisplayFor(x => item.StockAnterior)
+                    </td>
+                    <td class="text-end text-primary">
+                        @Html.DisplayFor(x => item.Cantidad)
+                    </td>
+                </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+</div>
+
+<!--JS para trabajar con los datos del form-->
+@section Scripts{
+   @{ await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+<script>
+    //Si la cantidad elegida en el control es menor a 1 o igual a 0 se activa el alerta que indica que seleccione una cantidad ccorrecta
+    $("#btnProducto").click(function () {
+        var cantidad = document.getElementById("cantidadId").value;
+        if (cantidad.toString() == '' || cantidad < 1) {
+            swal("Error", "Seleccione la cantidad correcta", "error");
+            return false;
+        }
+    });
+
+</script>
+}
+
