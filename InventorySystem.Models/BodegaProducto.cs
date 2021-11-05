@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace InventorySystem.Models
 {
-    public class BodegaProducto
+    public class BodegaProducto //Contiene las relaciones entre bodega y producto
     {
         [Key]
         public int Id { get; set; }
