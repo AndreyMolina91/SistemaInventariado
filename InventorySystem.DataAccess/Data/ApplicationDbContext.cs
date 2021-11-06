@@ -29,5 +29,7 @@ namespace InventorySystem.Data
         public DbSet<Inventario> Inventarios { get; set; }
 
         public DbSet<DetalleInventario> DetalleInventarios { get; set; }
+
+        public DbSet<Compania> Compania { get; set; }
     }
 }
